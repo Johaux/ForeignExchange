@@ -20,14 +20,55 @@
                 TextColor="Black">
             </Label>
             <Entry
+                Text="{Binding Amount, Mode=TwoWay}"
                 Placeholder="Enter the amount to convert..."
                 PlaceholderColor="Gray">
             </Entry>
+            <Label
+                FontSize="Medium"
+                Text="Source rate:"
+                TextColor="Black">
+            </Label>
             <Picker
+                ItemDisplayBinding="{Binding Name}"
+                ItemsSource="{Binding Rates}"
+                SelectedItem="{Binding SourceRate, Mode=TwoWay}"
                 TextColor="Black"
                 Title="Select a source rate">
             </Picker>
-            
+            <Label
+                FontSize="Medium"
+                Text="Target rate:"
+                TextColor="Black">
+            </Label>
+            <Picker
+                ItemDisplayBinding="{Binding Name}"
+                ItemsSource="{Binding Rates}"
+                SelectedItem="{Binding TargetRate, Mode=TwoWay}"
+                TextColor="Black"
+                Title="Select a target rate">
+            </Picker>
+            <ActivityIndicator
+                IsRunning="{Binding IsRunning, Mode=TwoWay}">
+            </ActivityIndicator>
+            <Button
+                Command="{Binding ConvertCommand}"
+                BorderRadius="30"
+                FontAttributes="Bold"
+                FontSize="Large"
+                HeightRequest="60"
+                IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                Text="Convert">
+            </Button>
+            <Label
+                BackgroundColor="WhiteSmoke"
+                HorizontalTextAlignment="Center"
+                Margin="5,10,5,10"
+                TextColor="Gray"
+                Text="{Binding Result, Mode=TwoWay}"
+                VerticalOptions="FillAndExpand"
+                VerticalTextAlignment="Center">
+            </Label>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>  
