@@ -4,10 +4,23 @@ namespace ForeignExchange.ViewModels
     using ForeignExchange.Models;
     using GalaSoft.MvvmLight.Command;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Windows.Input;
 
-    public class MainViewModel
+    public class MainViewModel : INotifyPropertyChanged
     {
+        #region Events
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
+        #region Atributes
+
+        bool _isRunning;
+        string _result;
+
+
+        #endregion
+
         #region Properties
         public string Amount
         {
@@ -25,18 +38,70 @@ namespace ForeignExchange.ViewModels
 
         public Rate TargetRate { get; set; }
 
-        public bool IsRunning { get; set; }
+        public bool IsRunning
+        {
+            get
+            {
+                return _isRunning;
+            }
+            set
+            {
+                if (_isRunning != value)
+                {
+                    _isRunning = value;
+                    PropertyChanged?.Invoke(
+                        this,
+                        new PropertyChangedEventArgs(nameof(IsRunning)));
+                }
+            }
+
+        }
 
         public bool IsEnabled { get; set; }
 
-        public string Result { get; set; }
-
-        #endregion
-        
-        public MainViewModel()
+        public string Result
         {
+            get
+            {
+                return _result;
+            }
+            set
+            {
+                if (_result != value)
+                {
+                    _result = value;
+                    PropertyChanged?.Invoke(
+                        this,
+                        new PropertyChangedEventArgs(nameof(Result)));
+                }
+            }
         }
 
+        #endregion
+
+        #region Constructor
+
+        public MainViewModel()
+        {
+            LoadRates();
+        }
+
+
+        #region Methonds
+
+        void LoadRates()
+        {
+            IsRunning = true;
+            Result = "Loading Rates...";
+
+
+
+        }
+
+        #endregion
+
+
+        #endregion
         #region Commands
 
         public ICommand ConvertCommand
