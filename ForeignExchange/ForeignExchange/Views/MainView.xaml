@@ -71,6 +71,7 @@
                 HorizontalTextAlignment="Center"
                 Margin="5,10,5,10"
                 TextColor="Gray"
+                FontSize="Large"
                 Text="{Binding Result, Mode=TwoWay}"
                 VerticalOptions="FillAndExpand"
                 VerticalTextAlignment="Center">
